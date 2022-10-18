@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins&display=swap");
 
 @font-face {
   font-family: "nezto";
@@ -14,9 +14,6 @@
   src: local("josefin"),
     url(../assets/Fonts/josefin/JosefinSans-SemiBold.woff) format("woff");
 }
-
-
-
 
 .heroImg {
   width: 100vw;
@@ -46,6 +43,9 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+.mobCarousel {
+  display: none;
+}
 
 .heroTop {
   height: 120vh;
@@ -53,14 +53,13 @@
 }
 
 .headerNew {
-  gap:30rem;
+  gap: 30rem;
   position: absolute;
   height: 85px;
   width: 100vw;
   left: 0px;
   top: 0px;
   background: #ffffff;
-
 }
 
 .logo1 {
@@ -129,8 +128,6 @@
   background-size: 100% 100%;
 }
 
-
-
 .four {
   height: 30vh;
   width: 16vw;
@@ -158,11 +155,43 @@
   top: 105vh;
 }
 
-@media (max-width: 768px) and (min-width: 600px) {
+.mobDropDown {
+  display: none;
+}
 
-  .headerNew{
+.Sliding {
+  display: none;
+}
+
+.newSliding {
+  display: inline;
+}
+
+@media (max-width: 768px) and (min-width: 600px) {
+  .headerNew {
     padding-left: 5px;
     height: 20vh;
+  }
+
+  .mobDropDown {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    top: -50vh;
+    animation: Slide 1s ease-out 0s forwards;
+    z-index: 20;
+    padding-top: 40px;
+  }
+
+  .laptopCarousel {
+    display: none;
+  }
+
+  .mobCarousel {
+    display: block;
   }
 
   .header {
@@ -183,23 +212,20 @@
     font-size: 0.8rem;
   }
   .heroText {
-   
     font-size: 8rem;
-   
+
     margin-top: 5%;
   }
   .card {
-    width:40vw;
+    width: 40vw;
   }
 
-  .Sliding{
-    padding-top:23px;
-    margin-top:23px;
+  .Sliding {
+    display: block;
+    padding-top: 23px;
+    margin-top: 23px;
     margin-top: 12px;
     width: 20px;
-    
-    
-    
   }
   .one {
     width: 32vw;
@@ -245,11 +271,35 @@
     top: 105vh;
     left: -14vw;
   }
+  .newSliding {
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {
   .header {
     display: none;
+  }
+
+  .mobDropDown {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 20;
+    padding-top: 40px;
+    align-items: flex-start;
+    position: absolute;
+    top: -40vh;
+    animation: mobSilde 1s ease-out 0s forwards;
+  }
+
+  .laptopCarousel {
+    display: none;
+  }
+
+  .mobCarousel {
+    display: block;
   }
 
   .headTab {
@@ -275,7 +325,6 @@
   }
   .card {
     display: none;
-   
   }
 
   .otherCard {
@@ -302,7 +351,6 @@
     width: 70vw;
     height: 20vh;
   }
-
 
   .logo1 {
     width: 8vw;
@@ -335,12 +383,10 @@
   .headerNew {
     height: 12vh;
     padding-left: 5px;
-  
   }
   .screenDiv {
     background-color: white;
     /* transform: translateY(-2vh); */
-
   }
 
   .heroImgTwo {
@@ -375,12 +421,33 @@
     z-index: 10;
   }
 
-  .Sliding{
+  .Sliding {
+    display: block;
     transform: translateX(-70vw);
     margin-top: 12px;
   }
 
-  
+  .newSliding {
+    display: none;
+  }
+}
 
-  
+@keyframes Slide {
+  0% {
+    transform: translateY(-40vh);
+  }
+
+  100% {
+    transform: translateY(68vh);
+  }
+}
+
+@keyframes mobSilde {
+  0% {
+    transform: translateY(-40vh);
+  }
+
+  100% {
+    transform: translateY(50vh);
+  }
 }

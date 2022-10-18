@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BsArrowRight, BsArrowLeft, BsTwitter, BsInstagram } from 'react-icons/bs'
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa'
 import { AiFillInstagram } from 'react-icons/ai'
@@ -5,34 +6,66 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import Image from "next/image"
 import logo from '../assets/Images/logo.png'
-import logo1 from '../assets/Images/one1.png'
-import logo2 from '../assets/Images/two2.png'
-import logo3 from '../assets/Images/three3.png'
-import logo4 from '../assets/Images/four4.png'
+import { Pivot as Hamburger } from 'hamburger-react'
 
 export default function Home() {
+  const [isOpen, setOpen] = useState(false)
+
+  const modalHandler = () => {
+    setOpen(!isOpen)
+  }
+  if (typeof window !== "undefined") {
+    if (isOpen) {
+      const element = window.document.getElementById('slidingDiv');
+      element.classList.add('mobDropDown')
+    } else {
+      const element = window.document.getElementById('slidingDiv');
+      element.classList.remove('mobDropDown')
+    }
+  }
+
+
   return (
     <div className="relative" style={{ overflowX: "clip" }}>
 
       {/* =================Background Img====================== */}
 
-      <Carousel infiniteLoop={true} showIndicators={false} >
-        <div className="heroImg relative">
+      {/* carousel for tab/mob */}
 
-        </div>
-        <div className="heroImgTwo relative">
+      <div className='mobCarousel'>
+        <Carousel infiniteLoop={true} showIndicators={false} showArrows={false} >
+          <div className="heroImg relative">
 
-        </div>
-        <div className="heroImgThree relative">
+          </div>
+          <div className="heroImgTwo relative">
 
-        </div>
-        <div className="heroImgFour relative">
+          </div>
+          <div className="heroImgThree relative">
 
-        </div>
-      </Carousel>
+          </div>
+          <div className="heroImgFour relative">
 
-      <div className='heroTop bg-black absolute top-0 opacity-20'>
+          </div>
+        </Carousel>
+      </div>
 
+      {/* carousel for laptop  */}
+
+      <div className='laptopCarousel'>
+        <Carousel infiniteLoop={true} showIndicators={false}  >
+          <div className="heroImg relative">
+
+          </div>
+          <div className="heroImgTwo relative">
+
+          </div>
+          <div className="heroImgThree relative">
+
+          </div>
+          <div className="heroImgFour relative">
+
+          </div>
+        </Carousel>
       </div>
 
       {/* ==================head=============================== */}
@@ -47,20 +80,29 @@ export default function Home() {
         <div className=' header w-full tracking-widest  '>
 
           <ul className='flex    py-5 gap-12   w-full uppercase' >
-            <li className='  h-[16px] font-josefin font-[16px]  font-normal leading-4 underline text-[#F0B342]'>Home</li>
-            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4' >About us</li>
-            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4'>Look book</li>
-            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4' >Press</li>
-            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4' >Process</li>
-            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4' >contact</li>
+            <li className='  h-[16px] font-josefin font-[16px]  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>Home</li>
+            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4  hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6' >About us</li>
+            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4  hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>Look book</li>
+            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4  hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6' >Press</li>
+            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4  hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6' >Process</li>
+            <li className=' h-[16px] font-josefin font-[16px] text-black font-normal leading-4  hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6' >contact</li>
           </ul>
 
         </div>
       </div>
       {/* head mob and tab */}
-      <div className=' absolute headTab top-0 right-0  font-nezto flex flex-col space-y-3 px-4 pt-8  justify-end  tracking-widest items-center text-white '>
-        <p className='border-4 border-black w-12 '></p>
-        <p className='border-4 border-black w-12 '></p>
+      <div className=' absolute headTab top-0  right-0  font-nezto flex flex-col space-y-3 px-4 pt-8  justify-end  tracking-widest items-center  '>
+        <Hamburger toggled={isOpen} toggle={setOpen} onClick={modalHandler} />
+      </div>
+
+      {/* sliding header hamburger icon */}
+      <div id="slidingDiv" className=' absolute -top-96 bg-white  w-full  px-8 space-y-4 py-4'>
+        <p className=' h-[16px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6' >HOME</p>
+        <p className=' h-[10px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>ABOUT US</p>
+        <p className=' h-[16px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>LOOK BOOK</p>
+        <p className=' h-[16px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>PRESS</p>
+        <p className=' h-[16px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>PROCESS</p>
+        <p className=' h-[16px] font-josefin text-sm  font-normal leading-4 hover:text-[#F0B342] transition duration-300  hover:border-b-2 hover:border-[#F0B342] pb-6'>PROCESS</p>
       </div>
 
       <div className='absolute herotextTab top-72 px-36 text-white font-nezto  tracking-widest'>
@@ -103,7 +145,33 @@ export default function Home() {
         {/* right div */}
         <div className='rightDiv  flex flex-col screenDiv   xl:p-4  items-start '>
 
-          <Carousel className="Sliding" width={1000} showArrows={false} showIndicators={false} autoPlay={true}   infiniteLoop={true}  >
+          <Carousel className="Sliding" width={1000} showArrows={false} showIndicators={false} infiniteLoop={true}  >
+            <div className='flex justify-center items-center gap-8'>
+              <p className="one "></p>
+              <p className="two "></p>
+              <p className="three "></p>
+              <p className="four  "></p>
+
+            </div>
+            <div className='flex justify-center items-center gap-8'>
+              <p className="one "></p>
+              <p className="two "></p>
+              <p className="three"></p>
+              <p className="four "></p>
+
+            </div>
+            <div className='flex justify-center items-center gap-8'>
+              <p className="one "></p>
+              <p className="two "></p>
+              <p className="three"></p>
+              <p className="four "></p>
+
+            </div>
+
+
+          </Carousel>
+
+          <Carousel className="newSliding" width={1000} showArrows={true} showIndicators={false} infiniteLoop={true}  >
             <div className='flex justify-center items-center gap-8'>
               <p className="one "></p>
               <p className="two "></p>
